@@ -122,9 +122,10 @@ html.js .hero__h{animation-delay:.1s}html.js .hero__roles{animation-delay:.18s}h
 
 /* brands */
 .brands{padding-block:var(--sec)}
-.brands__grid{margin-top:clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
-.brands__grid li{aspect-ratio:2/1;display:grid;place-items:center;padding:clamp(14px,1.8vw,26px);border-radius:20px;background:var(--bg2);transition:transform .4s var(--ease),background .3s}
-.brands__grid img{max-height:100%;width:auto;max-width:100%;object-fit:contain}
+.brands__grid{margin-top:clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+.brands__grid li{aspect-ratio:3/2;display:grid;place-items:center;padding:clamp(12px,1.4vw,22px);border-radius:18px;background:var(--bg2);transition:transform .4s var(--ease),background .3s}
+.brands__grid img{height:calc(var(--h0) / var(--s,1));width:auto;max-width:86%;object-fit:contain}
+.brands__grid{--h0:clamp(46px,5vw,70px)}
 @media (hover:hover){.brands__grid li:hover{transform:translateY(-4px);background:#E8E8E8}}
 
 /* case studies */
@@ -174,7 +175,7 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
 
 /* tablet */
 @media (max-width:1000px){
-  .brands__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .brands__grid{grid-template-columns:repeat(4,minmax(0,1fr))}
   .cs__top{grid-template-columns:1fr}.cs__logo{justify-self:start}
   .cs__nums{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}
   .cs__grid{grid-template-columns:1fr}
@@ -190,6 +191,7 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
   .exp__list li,.job__list li{grid-template-columns:1fr;gap:8px}
   .brands__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .brands__grid li{border-radius:16px}
+  .brands__grid{--h0:66px}
   .facts{gap:28px 40px}
 }
 </style>
@@ -286,34 +288,34 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
       <p class="lede">A selection from the journey so far.</p>
     </div>
     <ul class="brands__grid" data-stagger>
-      <li><img src="images/logos/abans.png" alt="Abans" loading="lazy"></li>
-      <li><img src="images/logos/lg.png" alt="LG" loading="lazy"></li>
-      <li><img src="images/logos/xiaomi.png" alt="Xiaomi" loading="lazy"></li>
-      <li><img src="images/logos/motorola.png" alt="Motorola" loading="lazy"></li>
-      <li><img src="images/logos/damro.png" alt="Damro" loading="lazy"></li>
-      <li><img src="images/logos/fairfirst-insurance.png" alt="Fairfirst Insurance" loading="lazy"></li>
-      <li><img src="images/logos/laundromat.png" alt="Laundromat" loading="lazy"></li>
-      <li><img src="images/logos/vision-care.png" alt="Vision Care" loading="lazy"></li>
-      <li><img src="images/logos/pepper-st.png" alt="Pepper St" loading="lazy"></li>
-      <li><img src="images/logos/petmart.png" alt="Pet Mart" loading="lazy"></li>
-      <li><img src="images/logos/fox-resorts.png" alt="Fox Resorts" loading="lazy"></li>
-      <li><img src="images/logos/best-place.png" alt="Best Place" loading="lazy"></li>
-      <li><img src="images/logos/surado-campus.png" alt="Surado Campus" loading="lazy"></li>
-      <li><img src="images/logos/mandakini-properties.png" alt="Mandakini Properties" loading="lazy"></li>
-      <li><img src="images/logos/artivis.png" alt="Artivis" loading="lazy"></li>
-      <li><img src="images/logos/apple.png" alt="Apple" loading="lazy"></li>
-      <li><img src="images/logos/edinborough.png" alt="Edinborough" loading="lazy"></li>
-      <li><img src="images/logos/trinity-international.png" alt="Trinity International" loading="lazy"></li>
-      <li><img src="images/logos/swastha-amurtha.png" alt="Swastha Amurtha" loading="lazy"></li>
-      <li><img src="images/logos/territory-london.png" alt="Territory London" loading="lazy"></li>
-      <li><img src="images/logos/xitricon.png" alt="Xitricon" loading="lazy"></li>
-      <li><img src="images/logos/virstack-ai.png" alt="Virstack AI" loading="lazy"></li>
-      <li><img src="images/logos/lynear.png" alt="Lynear" loading="lazy"></li>
-      <li><img src="images/logos/slra.png" alt="SLRA" loading="lazy"></li>
-      <li><img src="images/logos/arthur-spence-travels.png" alt="Aitken Spence Travels" loading="lazy"></li>
-      <li><img src="images/logos/strength-logo.png" alt="Strength" loading="lazy"></li>
-      <li><img src="images/logos/abans-laptops.png" alt="Abans Laptops" loading="lazy"></li>
-      <li><img src="images/logos/abans-smartphones.png" alt="Abans Smartphones" loading="lazy"></li>
+      <li><img src="images/logos/abans.png" style="--s:1.87" alt="Abans" loading="lazy"></li>
+      <li><img src="images/logos/lg.png" style="--s:1.44" alt="LG" loading="lazy"></li>
+      <li><img src="images/logos/xiaomi.png" style="--s:1.79" alt="Xiaomi" loading="lazy"></li>
+      <li><img src="images/logos/motorola.png" style="--s:1.20" alt="Motorola" loading="lazy"></li>
+      <li><img src="images/logos/damro.png" style="--s:2.16" alt="Damro" loading="lazy"></li>
+      <li><img src="images/logos/fairfirst-insurance.png" style="--s:1.03" alt="Fairfirst Insurance" loading="lazy"></li>
+      <li><img src="images/logos/laundromat.png" style="--s:2.05" alt="Laundromat" loading="lazy"></li>
+      <li><img src="images/logos/vision-care.png" style="--s:1.17" alt="Vision Care" loading="lazy"></li>
+      <li><img src="images/logos/pepper-st.png" style="--s:2.69" alt="Pepper St" loading="lazy"></li>
+      <li><img src="images/logos/petmart.png" style="--s:1.53" alt="Pet Mart" loading="lazy"></li>
+      <li><img src="images/logos/fox-resorts.png" style="--s:1.22" alt="Fox Resorts" loading="lazy"></li>
+      <li><img src="images/logos/best-place.png" style="--s:1.22" alt="Best Place" loading="lazy"></li>
+      <li><img src="images/logos/surado-campus.png" style="--s:0.94" alt="Surado Campus" loading="lazy"></li>
+      <li><img src="images/logos/mandakini-properties.png" style="--s:1.33" alt="Mandakini Properties" loading="lazy"></li>
+      <li><img src="images/logos/artivis.png" style="--s:1.75" alt="Artivis" loading="lazy"></li>
+      <li><img src="images/logos/apple.png" style="--s:0.91" alt="Apple" loading="lazy"></li>
+      <li><img src="images/logos/edinborough.png" style="--s:1.36" alt="Edinborough" loading="lazy"></li>
+      <li><img src="images/logos/trinity-international.png" style="--s:1.02" alt="Trinity International" loading="lazy"></li>
+      <li><img src="images/logos/swastha-amurtha.png" style="--s:1.21" alt="Swastha Amurtha" loading="lazy"></li>
+      <li><img src="images/logos/territory-london.png" style="--s:2.02" alt="Territory London" loading="lazy"></li>
+      <li><img src="images/logos/xitricon.png" style="--s:1.10" alt="Xitricon" loading="lazy"></li>
+      <li><img src="images/logos/virstack-ai.png" style="--s:2.45" alt="Virstack AI" loading="lazy"></li>
+      <li><img src="images/logos/lynear.png" style="--s:0.91" alt="Lynear" loading="lazy"></li>
+      <li><img src="images/logos/slra.png" style="--s:1.80" alt="SLRA" loading="lazy"></li>
+      <li><img src="images/logos/arthur-spence-travels.png" style="--s:2.08" alt="Aitken Spence Travels" loading="lazy"></li>
+      <li><img src="images/logos/strength-logo.png" style="--s:1.03" alt="Strength" loading="lazy"></li>
+      <li><img src="images/logos/abans-laptops.png" style="--s:1.44" alt="Abans Laptops" loading="lazy"></li>
+      <li><img src="images/logos/abans-smartphones.png" style="--s:1.46" alt="Abans Smartphones" loading="lazy"></li>
     </ul>
   </div>
 </section>
