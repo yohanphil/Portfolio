@@ -1,1847 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Yohan Philip | Digital Architect</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --black: #020617;
-      --navy: #07111f;
-      --blue: #38bdf8;
-      --blue2: #2563eb;
-      --white: #ffffff;
-      --soft: #dbeafe;
-      --muted: #9fb0c9;
-      --line: rgba(56, 189, 248, 0.22);
-      --light: #f8fbff;
-      --dark-text: #0f172a;
-      --green: #22c55e;
-      --orange: #f97316;
-      --purple: #7c3aed;
-      --linkedin: #0A66C2;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Poppins", sans-serif;
-      background: var(--black);
-      color: var(--white);
-      overflow-x: hidden;
-      line-height: 1.7;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    .container {
-      width: min(1180px, 90%);
-      margin: auto;
-    }
-
-    .header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(2, 6, 23, 0.78);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .nav {
-      height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .brand-logo {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue), var(--blue2));
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      box-shadow: 0 0 32px rgba(56, 189, 248, 0.36);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 26px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--soft);
-      opacity: 0.85;
-      transition: 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--blue);
-      opacity: 1;
-    }
-
-    .hero {
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-      padding: 145px 0 70px;
-      background:
-        linear-gradient(rgba(56, 189, 248, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.035) 1px, transparent 1px),
-        linear-gradient(135deg, #020617 0%, #07111f 58%, #020617 100%);
-      background-size: 46px 46px, 46px 46px, auto;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .hero-bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, rgba(2,6,23,0.96) 0%, rgba(2,6,23,0.86) 43%, rgba(2,6,23,0.66) 75%, rgba(2,6,23,0.92) 100%),
-        linear-gradient(180deg, rgba(2,6,23,0.28), rgba(2,6,23,0.96));
-      z-index: 2;
-    }
-
-    .hero-bg img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      opacity: 0;
-      filter: saturate(0.95) contrast(1.05);
-      animation: heroFade 30s infinite;
-    }
-
-    .hero-bg img:nth-child(1) { animation-delay: 0s; }
-    .hero-bg img:nth-child(2) { animation-delay: 6s; }
-    .hero-bg img:nth-child(3) { animation-delay: 12s; }
-    .hero-bg img:nth-child(4) { animation-delay: 18s; }
-    .hero-bg img:nth-child(5) { animation-delay: 24s; }
-
-    @keyframes heroFade {
-      0% { opacity: 0; transform: scale(1.02); }
-      8% { opacity: 0.34; }
-      28% { opacity: 0.34; }
-      36% { opacity: 0; transform: scale(1.06); }
-      100% { opacity: 0; }
-    }
-
-    .hero-layout {
-      position: relative;
-      z-index: 4;
-      min-height: 650px;
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 70px;
-      align-items: center;
-    }
-
-    .hero-copy {
-      max-width: 790px;
-    }
-
-    .eyebrow {
-      color: var(--blue);
-      font-size: 13px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      font-weight: 900;
-      margin-bottom: 18px;
-    }
-
-    .hero h1 {
-      font-size: clamp(48px, 6vw, 86px);
-      line-height: 1.08;
-      letter-spacing: -3.5px;
-      margin-bottom: 24px;
-      padding-bottom: 8px;
-      overflow: visible;
-    }
-
-    .hero h1 span {
-      display: inline-block;
-      padding-bottom: 8px;
-      background: linear-gradient(135deg, #38bdf8, #2563eb, #ffffff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero h2 {
-      color: var(--soft);
-      font-size: clamp(22px, 2vw, 30px);
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .hero-positioning {
-      color: #cbd5e1;
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 26px;
-      max-width: 820px;
-    }
-
-    .hero-positioning span {
-      color: var(--blue);
-      font-weight: 800;
-    }
-
-    .hero-text {
-      max-width: 720px;
-      color: #b9c6d8;
-      font-size: 17px;
-      line-height: 1.9;
-      margin-bottom: 34px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 38px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 26px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 800;
-      transition: 0.3s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--blue), var(--blue2));
-      color: #fff;
-      box-shadow: 0 14px 42px rgba(56, 189, 248, 0.28);
-    }
-
-    .btn-secondary {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      color: var(--soft);
-    }
-
-    .btn-linkedin {
-      background: var(--linkedin);
-      color: #ffffff;
-      box-shadow: 0 14px 42px rgba(10, 102, 194, 0.28);
-    }
-
-    .btn-email {
-      background: #ffffff;
-      color: #0f172a;
-      border: 1px solid rgba(255,255,255,0.6);
-      box-shadow: 0 14px 42px rgba(255,255,255,0.12);
-    }
-
-    .btn-whatsapp {
-      background: #25D366;
-      color: #03110a;
-      box-shadow: 0 14px 42px rgba(37, 211, 102, 0.24);
-    }
-
-    .btn:hover {
-      transform: translateY(-4px);
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      max-width: 760px;
-    }
-
-    .stat-card {
-      padding: 22px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.055);
-      border: 1px solid var(--line);
-      backdrop-filter: blur(16px);
-    }
-
-    .stat-card h3 {
-      color: var(--blue);
-      font-size: 34px;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .stat-card p {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .hero-panel {
-      position: relative;
-      display: grid;
-      place-items: center;
-    }
-
-    .portrait-card {
-      position: relative;
-      width: min(430px, 100%);
-      border-radius: 34px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.05);
-      box-shadow: 0 35px 100px rgba(0,0,0,0.42);
-      backdrop-filter: blur(18px);
-    }
-
-    .portrait-card img {
-      width: 100%;
-      height: 470px;
-      object-fit: cover;
-      object-position: center top;
-      filter: saturate(1.03) contrast(1.04);
-    }
-
-    .portrait-caption {
-      padding: 26px;
-      background: rgba(2, 6, 23, 0.88);
-    }
-
-    .portrait-caption p {
-      color: var(--blue);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 12px;
-      font-weight: 900;
-      margin-bottom: 8px;
-    }
-
-    .portrait-caption h3 {
-      font-size: 26px;
-      line-height: 1.25;
-    }
-
-    .alumni-badge {
-      margin-top: 18px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 18px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.055);
-      border: 1px solid var(--line);
-      backdrop-filter: blur(18px);
-    }
-
-    .ipac-logo-wrap {
-      width: 62px;
-      height: 62px;
-      border-radius: 18px;
-      background: #ffffff;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      flex: 0 0 auto;
-    }
-
-    .ipac-logo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .alumni-badge span {
-      color: var(--blue);
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 900;
-    }
-
-    .alumni-badge p {
-      color: var(--soft);
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 1.4;
-    }
-
-    .tools-full-strip {
-      position: relative;
-      z-index: 4;
-      width: 100%;
-      margin-top: 35px;
-      padding: 24px 0;
-      overflow: hidden;
-      border-top: 1px solid rgba(56,189,248,0.16);
-      border-bottom: 1px solid rgba(56,189,248,0.16);
-      background: rgba(255,255,255,0.025);
-      mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-    }
-
-    .tools-track {
-      display: flex;
-      align-items: center;
-      gap: 46px;
-      width: max-content;
-      animation: moveTools 40s linear infinite;
-    }
-
-    .tool-logo {
-      width: 110px;
-      height: 70px;
-      flex: 0 0 110px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      padding: 0;
-      overflow: visible;
-    }
-
-    .tool-logo img {
-      display: block;
-      width: auto;
-      height: auto;
-      max-width: 100%;
-      max-height: 58px;
-      object-fit: contain;
-      object-position: center;
-      margin: auto;
-      filter: drop-shadow(0 10px 22px rgba(0,0,0,0.28));
-    }
-
-    .tool-logo img[alt="Klaviyo"] {
-      max-width: 150px;
-      max-height: 46px;
-    }
-
-    .tool-logo img[alt="Google Ads"],
-    .tool-logo img[alt="Google Analytics"],
-    .tool-logo img[alt="Google Tag Manager"],
-    .tool-logo img[alt="Shopify"],
-    .tool-logo img[alt="TikTok"],
-    .tool-logo img[alt="Figma"],
-    .tool-logo img[alt="Canva"],
-    .tool-logo img[alt="HubSpot"],
-    .tool-logo img[alt="Meta"] {
-      max-height: 64px;
-    }
-
-    @keyframes moveTools {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    .section {
-      padding: 100px 0;
-    }
-
-    .section-dark {
-      background: linear-gradient(180deg, #020617, #07111f);
-      color: #fff;
-    }
-
-    .section-light {
-      background: var(--light);
-      color: var(--dark-text);
-    }
-
-    .section-title {
-      max-width: 860px;
-      margin-bottom: 46px;
-    }
-
-    .section-title.center {
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .section-title h2 {
-      font-size: clamp(34px, 4.5vw, 58px);
-      line-height: 1.12;
-      letter-spacing: -1.4px;
-    }
-
-    .section-title p {
-      margin-top: 16px;
-      color: #64748b;
-      line-height: 1.85;
-    }
-
-    .section-dark .section-title p {
-      color: var(--muted);
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .service-card {
-      padding: 32px;
-      min-height: 230px;
-      border-radius: 26px;
-      background: rgba(255,255,255,0.055);
-      border: 1px solid var(--line);
-      transition: 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(56,189,248,0.5);
-      box-shadow: 0 25px 80px rgba(0,0,0,0.25);
-    }
-
-    .service-card span {
-      color: var(--blue);
-      font-weight: 900;
-      font-size: 14px;
-    }
-
-    .service-card h3 {
-      font-size: 23px;
-      margin: 16px 0 12px;
-    }
-
-    .service-card p {
-      color: var(--muted);
-    }
-
-    .experience-section {
-      padding: 80px 0;
-    }
-
-    .experience-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .experience-item {
-      background: #ffffff;
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: 0 18px 50px rgba(15,23,42,0.08);
-      border: 1px solid rgba(37,99,235,0.09);
-      border-left: 5px solid var(--blue2);
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: flex-start;
-      min-height: 150px;
-      transition: 0.3s ease;
-    }
-
-    .experience-item:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 70px rgba(15,23,42,0.12);
-    }
-
-    .experience-item span {
-      color: var(--blue2);
-      font-weight: 900;
-      font-size: 13px;
-    }
-
-    .experience-item h3 {
-      font-size: 21px;
-      line-height: 1.3;
-      margin: 8px 0 6px;
-      color: #0f172a;
-    }
-
-    .experience-item p {
-      color: #64748b;
-      font-size: 14px;
-    }
-
-    .experience-pill {
-      padding: 8px 13px;
-      border-radius: 999px;
-      background: rgba(37,99,235,0.08);
-      color: var(--blue2);
-      font-size: 11px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .brands-section {
-      overflow: hidden;
-    }
-
-    .brand-showcase {
-      border-radius: 36px;
-      border: 1px solid var(--line);
-      background:
-        radial-gradient(circle at 50% 50%, rgba(56,189,248,0.14), transparent 35%),
-        rgba(255,255,255,0.035);
-      overflow: hidden;
-      padding: 52px 0;
-    }
-
-    .logo-marquee {
-      overflow: hidden;
-      padding: 16px 0;
-      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-    }
-
-    .logo-track {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      width: max-content;
-      animation: moveLogos 34s linear infinite;
-    }
-
-    .logo-track.reverse {
-      animation: moveLogosReverse 36s linear infinite;
-    }
-
-    .logo-card {
-      width: 230px;
-      height: 120px;
-      flex: 0 0 auto;
-      padding: 22px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.98);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 18px 45px rgba(0,0,0,0.25);
-      overflow: hidden;
-    }
-
-    .logo-card img {
-      max-width: 100%;
-      max-height: 72px;
-      object-fit: contain;
-      margin: auto;
-    }
-
-    @keyframes moveLogos {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    @keyframes moveLogosReverse {
-      from { transform: translateX(-50%); }
-      to { transform: translateX(0); }
-    }
-
-    .case-layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-
-    .case-main {
-      border-radius: 36px;
-      padding: 40px;
-      background:
-        radial-gradient(circle at 88% 10%, rgba(56,189,248,0.18), transparent 34%),
-        linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
-      border: 1px solid rgba(37,99,235,0.1);
-      box-shadow: 0 24px 70px rgba(15,23,42,0.1);
-    }
-
-    .case-main.dark-case {
-      background:
-        radial-gradient(circle at 90% 10%, rgba(124,58,237,0.18), transparent 34%),
-        linear-gradient(135deg, #ffffff 0%, #f9f7ff 100%);
-    }
-
-    .case-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      align-items: flex-start;
-      margin-bottom: 28px;
-    }
-
-    .case-brand {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 18px;
-    }
-
-    .case-logo {
-      width: 90px;
-      height: 90px;
-      border-radius: 24px;
-      background: #ffffff;
-      padding: 14px;
-      display: grid;
-      place-items: center;
-      box-shadow: 0 15px 45px rgba(15,23,42,0.1);
-      border: 1px solid rgba(37,99,235,0.08);
-    }
-
-    .case-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .case-label {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(37,99,235,0.08);
-      color: #2563eb;
-      font-size: 12px;
-      font-weight: 900;
-      margin-bottom: 10px;
-    }
-
-    .case-label.purple {
-      background: rgba(124,58,237,0.09);
-      color: #7c3aed;
-    }
-
-    .case-main h3 {
-      font-size: clamp(30px, 3.5vw, 48px);
-      line-height: 1.12;
-      color: #0f172a;
-      max-width: 820px;
-    }
-
-    .case-main p {
-      color: #64748b;
-    }
-
-    .case-status {
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: #020617;
-      color: #ffffff;
-      font-size: 12px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .case-note {
-      font-size: 12px;
-      color: #94a3b8;
-      margin-top: 10px;
-      max-width: 260px;
-    }
-
-    .case-metrics {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin: 30px 0;
-    }
-
-    .metric-card {
-      padding: 22px;
-      border-radius: 24px;
-      background: rgba(37,99,235,0.045);
-      border: 1px solid rgba(37,99,235,0.08);
-    }
-
-    .metric-card.purple {
-      background: rgba(124,58,237,0.055);
-      border-color: rgba(124,58,237,0.12);
-    }
-
-    .metric-card h4 {
-      color: #2563eb;
-      font-size: 30px;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .metric-card.purple h4 {
-      color: #7c3aed;
-    }
-
-    .metric-card p {
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .case-detail-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 26px;
-    }
-
-    .case-detail {
-      padding: 22px;
-      border-radius: 22px;
-      background: #ffffff;
-      border: 1px solid rgba(37,99,235,0.08);
-      box-shadow: 0 16px 40px rgba(15,23,42,0.05);
-    }
-
-    .case-detail span {
-      color: #2563eb;
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .case-detail.purple span {
-      color: #7c3aed;
-    }
-
-    .case-detail p {
-      margin-top: 8px;
-      font-size: 14px;
-    }
-
-    .case-insight-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 26px;
-    }
-
-    .case-panel {
-      border-radius: 28px;
-      padding: 28px;
-      background: #ffffff;
-      border: 1px solid rgba(37,99,235,0.08);
-      box-shadow: 0 18px 55px rgba(15,23,42,0.07);
-    }
-
-    .case-panel h4 {
-      color: #0f172a;
-      font-size: 22px;
-      margin-bottom: 18px;
-    }
-
-    .chart-row {
-      margin-bottom: 18px;
-    }
-
-    .chart-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 8px;
-      font-size: 13px;
-      font-weight: 800;
-      color: #0f172a;
-    }
-
-    .chart-track {
-      height: 12px;
-      border-radius: 999px;
-      background: #e2e8f0;
-      overflow: hidden;
-    }
-
-    .chart-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--blue), var(--blue2));
-    }
-
-    .chart-fill.green {
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-    }
-
-    .chart-fill.orange {
-      background: linear-gradient(135deg, #f97316, #ea580c);
-    }
-
-    .chart-fill.purple {
-      background: linear-gradient(135deg, #a855f7, #7c3aed);
-    }
-
-    .funnel-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .funnel-item {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: center;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: #f8fbff;
-      border: 1px solid rgba(37,99,235,0.08);
-    }
-
-    .funnel-item span {
-      color: #64748b;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .funnel-item strong {
-      color: #0f172a;
-      font-size: 18px;
-      white-space: nowrap;
-    }
-
-    .brand-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .brand-chip {
-      padding: 9px 14px;
-      border-radius: 999px;
-      background: rgba(124,58,237,0.08);
-      color: #5b21b6;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .contact-section {
-      background:
-        radial-gradient(circle at 20% 20%, rgba(56,189,248,0.16), transparent 30%),
-        linear-gradient(180deg, #07111f, #020617);
-    }
-
-    .contact-box {
-      max-width: 820px;
-      margin: auto;
-      text-align: center;
-      border-radius: 34px;
-      padding: 52px;
-      background: rgba(255,255,255,0.055);
-      border: 1px solid var(--line);
-      box-shadow: 0 30px 90px rgba(0,0,0,0.35);
-    }
-
-    .contact-box h2 {
-      font-size: clamp(34px, 4vw, 54px);
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-
-    .contact-details {
-      margin-top: 20px;
-      color: var(--muted);
-    }
-
-    .contact-socials {
-      margin-top: 28px;
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .footer {
-      padding: 26px;
-      text-align: center;
-      background: #020617;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: 0.8s ease;
-    }
-
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 1040px) {
-      .hero-layout {
-        grid-template-columns: 1fr;
-        gap: 44px;
-      }
-
-      .hero-panel {
-        place-items: start;
-      }
-
-      .portrait-card {
-        width: 100%;
-        max-width: 560px;
-      }
-
-      .services-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .case-metrics,
-      .case-detail-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .case-insight-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .experience-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .experience-item {
-        min-height: auto;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .header {
-        position: absolute;
-      }
-
-      .nav {
-        height: auto;
-        padding: 18px 0;
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 14px;
-      }
-
-      .nav-links a {
-        font-size: 12px;
-      }
-
-      .hero {
-        padding: 150px 0 50px;
-      }
-
-      .hero-bg::after {
-        background:
-          linear-gradient(180deg, rgba(2,6,23,0.9) 0%, rgba(2,6,23,0.88) 55%, rgba(2,6,23,0.98) 100%);
-      }
-
-      .hero-layout {
-        min-height: auto;
-      }
-
-      .hero h1 {
-        font-size: 40px;
-        letter-spacing: -2px;
-        line-height: 1.08;
-      }
-
-      .hero h2 {
-        font-size: 21px;
-      }
-
-      .hero-positioning {
-        font-size: 13px;
-      }
-
-      .hero-text {
-        font-size: 15px;
-      }
-
-      .hero-stats {
-        grid-template-columns: 1fr;
-      }
-
-      .portrait-card img {
-        height: auto;
-        max-height: none;
-        object-fit: contain;
-        object-position: center;
-        background: #020617;
-      }
-
-      .portrait-caption h3 {
-        font-size: 22px;
-      }
-
-      .tools-full-strip {
-        margin-top: 32px;
-        padding: 20px 0;
-      }
-
-      .tools-track {
-        gap: 34px;
-      }
-
-      .tool-logo {
-        width: 82px;
-        height: 58px;
-        flex: 0 0 82px;
-      }
-
-      .tool-logo img {
-        max-height: 46px;
-      }
-
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .service-card {
-        min-height: auto;
-      }
-
-      .experience-section {
-        padding: 65px 0;
-      }
-
-      .experience-item {
-        flex-direction: column;
-        padding: 22px;
-      }
-
-      .experience-pill {
-        width: fit-content;
-      }
-
-      .logo-card {
-        width: 170px;
-        height: 94px;
-      }
-
-      .logo-card img {
-        max-height: 54px;
-      }
-
-      .case-top {
-        flex-direction: column;
-      }
-
-      .case-brand {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .case-logo {
-        width: 80px;
-        height: 80px;
-      }
-
-      .case-metrics,
-      .case-detail-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .case-main,
-      .case-panel {
-        padding: 24px;
-      }
-
-      .funnel-item {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .contact-box {
-        padding: 32px 22px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yohan Philip | Digital Marketing Portfolio</title>
+<meta name="description" content="Yohan Philip, digital marketer and MBA. Seven years building paid media, content and reporting systems that turn attention into measurable growth.">
+<meta property="og:title" content="Yohan Philip | Digital Marketing Portfolio">
+<meta property="og:description" content="Digital systems that turn attention into measurable growth.">
+<meta property="og:image" content="https://yohan.overclock.agency/images/hero-speaking.jpg">
+<meta property="og:url" content="https://yohan.overclock.agency/">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="canonical" href="https://yohan.overclock.agency/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --bg:#FFFFFF;--bg2:#F2F2F2;--ink:#0A0A0A;--ink2:#565656;--line:rgba(10,10,10,.12);
+  --heat:#FF5A14;--band:#0A0A0A;--max:1240px;--pad:clamp(20px,4vw,56px);--sec:clamp(88px,11vw,168px);
+  --ease:cubic-bezier(.2,.7,.2,1);--hd:72px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:var(--hd);-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 "Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{width:min(var(--max),100% - var(--pad) * 2);margin-inline:auto}
+.d{font-family:"Poppins",sans-serif;font-weight:700;letter-spacing:-.05em;line-height:.96}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--heat);outline-offset:3px;border-radius:6px}
+.skip{position:fixed;left:16px;top:-60px;z-index:100;padding:10px 16px;border-radius:999px;background:var(--heat);color:#0A0A0A;font-weight:600}
+.skip:focus{top:12px}
+
+/* buttons */
+.b{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font-weight:600;font-size:16px;transition:transform .2s var(--ease),background .2s,color .2s,border-color .2s}
+.b svg{width:18px;height:18px}
+.b--main{background:var(--heat);color:#0A0A0A}
+.b--line{border:1.5px solid currentColor}
+.b--ink{background:#0A0A0A;color:#FFFFFF}
+.b:active{transform:scale(.97)}
+@media (hover:hover){.b--main:hover{transform:translateY(-2px)}.b--line:hover{background:rgba(10,10,10,.06)}.b--ink:hover{transform:translateY(-2px)}}
+
+/* header */
+.hd{position:fixed;inset:0 0 auto;z-index:50;height:var(--hd);background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s,transform .4s var(--ease)}
+.hd.is-scrolled{border-color:var(--line)}
+.hd.is-hidden{transform:translateY(-100%)}
+.hd__in{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.hd__logo{display:flex;align-items:center;gap:10px;font:700 19px/1 "Poppins",sans-serif;letter-spacing:-.04em}
+.hd__logo svg{width:26px;height:26px}
+.hd__nav{display:flex;align-items:center;gap:clamp(18px,2.4vw,34px);font-size:15px;font-weight:500}
+.hd__nav a:not(.b){position:relative;padding:6px 0}
+.hd__nav a:not(.b)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--heat);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+@media (hover:hover){.hd__nav a:not(.b):hover::after{transform:scaleX(1)}}
+.hd__nav .b{min-height:42px;padding:0 20px;font-size:15px}
+.hd__menu{display:none;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--ink);background:none;font:600 15px "Inter",sans-serif;color:var(--ink);cursor:pointer}
+
+/* ring mark */
+.ring circle{fill:none}
+.ring .trk{stroke:rgba(10,10,10,.1)}
+.ring .arc{stroke:var(--ink);stroke-dasharray:100 100;stroke-dashoffset:100}
+.ring .over{stroke:var(--heat);stroke-dasharray:0 100}
+.is-drawn .ring .arc,.ring.is-drawn .arc{animation:arc 1.6s cubic-bezier(.65,0,.35,1) .25s forwards}
+.is-drawn .ring .over,.ring.is-drawn .over{animation:over .8s var(--ease) 1.85s forwards}
+@keyframes arc{to{stroke-dashoffset:0}}
+@keyframes over{to{stroke-dasharray:19 100}}
+.hd__logo .ring .arc{stroke-dashoffset:0;animation:none}
+.hd__logo .ring .over{stroke-dasharray:19 100;animation:none}
+
+/* hero */
+.hero{padding:calc(var(--hd) + clamp(48px,8vh,96px)) 0 clamp(56px,7vw,104px);text-align:center}
+.hero__me{position:relative;width:clamp(190px,20vw,270px);aspect-ratio:1;margin-inline:auto}
+.hero__me .ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.hero__me .ring circle{stroke-width:5}
+.hero__me img{position:absolute;inset:9%;width:82%;height:82%;border-radius:50%;object-fit:cover;object-position:50% 22%}
+.hero__h{margin-top:clamp(28px,4vh,44px);font-size:clamp(54px,9.4vw,152px)}
+.hero__roles{margin-top:18px;font-weight:500;font-size:clamp(15px,1.2vw,17px);color:var(--ink2)}
+.hero__lead{margin:clamp(18px,2.6vh,28px) auto 0;max-width:34ch;font-size:clamp(19px,1.7vw,24px);line-height:1.45}
+.hero__acts{margin-top:clamp(26px,3.4vh,40px);display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.facts{margin-top:clamp(48px,6vw,80px);display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(28px,6vw,96px)}
+.facts li{display:flex;flex-direction:column;align-items:center;gap:6px}
+.facts b{font:700 clamp(40px,4.6vw,68px)/1 "Poppins",sans-serif;letter-spacing:-.05em}
+.facts span{font-size:15px;color:var(--ink2);max-width:18ch}
+.facts img{height:clamp(40px,4.6vw,64px);width:auto;border-radius:12px}
+html.js .hero__me,html.js .hero__h,html.js .hero__roles,html.js .hero__lead,html.js .hero__acts,html.js .facts{animation:up 1s var(--ease) both}
+html.js .hero__h{animation-delay:.1s}html.js .hero__roles{animation-delay:.18s}html.js .hero__lead{animation-delay:.24s}html.js .hero__acts{animation-delay:.32s}html.js .facts{animation-delay:.42s}
+@keyframes up{from{opacity:0;transform:translateY(18px)}}
+
+/* tools */
+.tools{padding-block:28px 40px;overflow:hidden;border-block:1px solid var(--line)}
+.tools__track{display:flex;gap:56px;width:max-content;animation:slide 48s linear infinite}
+.tools img{height:30px;width:auto}
+@media (hover:hover){.tools:hover .tools__track{animation-play-state:paused}}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* section heads */
+.h2{font-size:clamp(42px,6vw,96px)}
+.lede{margin-top:16px;max-width:46ch;font-size:clamp(17px,1.4vw,20px);color:var(--ink2)}
+.head{text-align:center}.head .lede{margin-inline:auto}
+
+/* expertise */
+.exp{padding-block:var(--sec)}
+.exp__list{margin-top:clamp(40px,5vw,72px);border-top:1px solid var(--line)}
+.exp__list li{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(16px,4vw,64px);align-items:center;padding-block:clamp(22px,2.8vw,38px);border-bottom:1px solid var(--line)}
+.exp__list h3{font:700 clamp(28px,3.6vw,56px)/1 "Poppins",sans-serif;letter-spacing:-.05em;transition:color .3s,transform .4s var(--ease)}
+.exp__list p{font-size:clamp(16px,1.3vw,19px);color:var(--ink2)}
+@media (hover:hover){.exp__list li:hover h3{color:var(--heat);transform:translateX(8px)}}
+
+/* experience */
+.job{background:var(--band);color:#F2F2F2;padding-block:var(--sec)}
+.job .lede{color:#B1B1B1}
+.job__list{margin-top:clamp(40px,5vw,72px);border-top:1px solid rgba(255,255,255,.16)}
+.job__list li{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(12px,4vw,64px);padding-block:clamp(24px,3vw,40px);border-bottom:1px solid rgba(255,255,255,.16)}
+.job__when{font:600 clamp(16px,1.3vw,19px)/1.3 "Inter",sans-serif;color:#B1B1B1;padding-top:.4em}
+.job__list li.is-now .job__when{color:var(--heat)}
+.job__list h3{font:700 clamp(26px,3vw,46px)/1.04 "Poppins",sans-serif;letter-spacing:-.045em}
+.job__list p{margin-top:8px;font-size:clamp(16px,1.3vw,19px);color:#CECECE}
+.job__note{margin-top:32px;display:flex;align-items:center;gap:16px;color:#CECECE}
+.job__note img{width:52px;height:52px;border-radius:12px;background:#fff}
+
+/* brands */
+.brands{padding-block:var(--sec)}
+.brands__grid{margin-top:clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.brands__grid li{aspect-ratio:2/1;display:grid;place-items:center;padding:clamp(14px,1.8vw,26px);border-radius:20px;background:var(--bg2);transition:transform .4s var(--ease),background .3s}
+.brands__grid img{max-height:100%;width:auto;max-width:100%;object-fit:contain}
+@media (hover:hover){.brands__grid li:hover{transform:translateY(-4px);background:#E8E8E8}}
+
+/* case studies */
+.cs{padding-block:var(--sec)}
+.cs--ink{background:var(--band);color:#F2F2F2}
+.cs--heat{background:var(--heat);color:#0A0A0A}
+.cs__top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:clamp(24px,5vw,80px);align-items:end}
+.cs__kind{font-weight:600;font-size:16px;opacity:.75}
+.cs__h{margin-top:14px;font-size:clamp(40px,5.6vw,92px)}
+.cs__logo{justify-self:end;width:min(100%,260px);aspect-ratio:2/1;display:grid;place-items:center;padding:18px 24px;border-radius:24px;background:#FFFFFF}
+.cs__logo img{max-height:100%;width:auto;object-fit:contain}
+.cs__intro{margin-top:clamp(24px,3vw,40px);max-width:60ch;font-size:clamp(17px,1.4vw,20px);line-height:1.6;opacity:.9}
+.cs__when{margin-top:14px;font-weight:600;font-size:15px;opacity:.75}
+.cs__nums{margin-top:clamp(44px,5vw,80px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.4vw,32px);border-top:2px solid currentColor;padding-top:clamp(24px,3vw,40px)}
+.cs__nums b{display:block;font:700 clamp(46px,5.6vw,92px)/.95 "Poppins",sans-serif;letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.cs__nums span{display:block;margin-top:10px;font-size:15px;line-height:1.45;opacity:.85;max-width:22ch}
+.cs__grid{margin-top:clamp(44px,5vw,72px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px)}
+.cs__grid h4{font:700 20px/1.2 "Poppins",sans-serif;letter-spacing:-.03em}
+.cs__grid p{margin-top:8px;font-size:16px;line-height:1.6;opacity:.85}
+.cs__tags{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 20px;font-weight:600;font-size:15px}
+
+/* now */
+.now{padding-block:clamp(88px,10vw,150px);text-align:center}
+.now__ring{width:clamp(88px,9vw,120px);height:auto;margin:0 auto 28px;transform:rotate(-90deg);overflow:visible}
+.now__ring circle{stroke-width:13}
+.now__h{font-size:clamp(46px,7vw,112px)}
+.now__p{margin:20px auto 0;max-width:38ch;font-size:clamp(18px,1.5vw,22px);color:var(--ink2)}
+.now .b{margin-top:32px}
+
+/* contact */
+.ct{background:var(--band);color:#F2F2F2;padding-block:var(--sec);text-align:center}
+.ct__h{font-size:clamp(48px,8vw,128px);max-width:12ch;margin-inline:auto}
+.ct__acts{margin-top:clamp(32px,4vw,52px);display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.ct .b--line{color:#F2F2F2}
+@media (hover:hover){.ct .b--line:hover{background:rgba(255,255,255,.08)}}
+.ct__mail{display:inline-block;margin-top:28px;font-size:clamp(17px,1.5vw,21px);text-decoration:underline;text-decoration-color:var(--heat);text-decoration-thickness:2px;text-underline-offset:6px}
+.ft{background:var(--band);color:#8E8E8E;font-size:14px;padding-block:28px;border-top:1px solid rgba(255,255,255,.1)}
+.ft__in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+.ft a{color:#CECECE;text-decoration:underline;text-underline-offset:3px}
+
+/* reveal */
+html.js [data-in]{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+html.js [data-in].is-in{opacity:1;transform:none}
+html.js [data-stagger]>*{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+html.js [data-stagger].is-in>*{opacity:1;transform:none}
+html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-stagger].is-in>*:nth-child(3){transition-delay:.12s}html.js [data-stagger].is-in>*:nth-child(4){transition-delay:.18s}html.js [data-stagger].is-in>*:nth-child(5){transition-delay:.24s}html.js [data-stagger].is-in>*:nth-child(6){transition-delay:.3s}html.js [data-stagger].is-in>*:nth-child(n+7){transition-delay:.36s}
+
+/* tablet */
+@media (max-width:1000px){
+  .brands__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cs__top{grid-template-columns:1fr}.cs__logo{justify-self:start}
+  .cs__nums{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}
+  .cs__grid{grid-template-columns:1fr}
+}
+/* phone */
+@media (max-width:760px){
+  .hd__nav{position:fixed;inset:var(--hd) 0 auto;flex-direction:column;align-items:stretch;gap:0;padding:12px var(--pad) 24px;background:#FFFFFF;border-bottom:1px solid var(--line);transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+  .hd__nav a:not(.b){padding:14px 0;font-size:20px;font-weight:600;border-bottom:1px solid var(--line)}
+  .hd__nav .b{margin-top:16px;min-height:52px}
+  .hd.is-open .hd__nav{opacity:1;visibility:visible;transform:none}
+  .hd__menu{display:inline-flex;align-items:center}
+  .hero__acts,.ct__acts{flex-direction:column}.hero__acts .b,.ct__acts .b{width:100%}
+  .exp__list li,.job__list li{grid-template-columns:1fr;gap:8px}
+  .brands__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .brands__grid li{border-radius:16px}
+  .facts{gap:28px 40px}
+}
+</style>
 </head>
-
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-  <header class="header">
-    <div class="container nav">
-      <a href="#" class="brand-logo">YP</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ring" viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50" pathLength="100"/><circle class="arc" cx="60" cy="60" r="50" pathLength="100"/><circle class="over" cx="60" cy="60" r="50" pathLength="100"/></symbol>
+</svg>
 
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#expertise">Expertise</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#brands">Brands</a></li>
-          <li><a href="#stories">Case Studies</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+<header class="hd" data-hd>
+  <div class="hd__in wrap">
+    <a class="hd__logo" href="#top" aria-label="Yohan Philip, back to top"><svg class="ring" viewBox="0 0 120 120" aria-hidden="true" style="transform:rotate(-90deg)"><circle class="trk" cx="60" cy="60" r="44" pathLength="100" stroke-width="20"/><circle class="arc" cx="60" cy="60" r="44" pathLength="100" stroke-width="20"/><circle class="over" cx="60" cy="60" r="44" pathLength="100" stroke-width="20"/></svg>Yohan Philip</a>
+    <button class="hd__menu" type="button" aria-expanded="false" aria-controls="nav" data-menu>Menu</button>
+    <nav class="hd__nav" id="nav" aria-label="Sections">
+      <a href="#expertise">Expertise</a>
+      <a href="#experience">Experience</a>
+      <a href="#brands">Brands</a>
+      <a href="#work">Case studies</a>
+      <a class="b b--main" href="#contact">Let's talk</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top" aria-labelledby="h1">
+  <div class="wrap">
+    <div class="hero__me is-drawn">
+      <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="trk" cx="60" cy="60" r="56" pathLength="100"/><circle class="arc" cx="60" cy="60" r="56" pathLength="100"/><circle class="over" cx="60" cy="60" r="56" pathLength="100"/></svg>
+      <img src="images/yohan-portrait.jpg" width="900" height="1200" alt="Yohan Philip speaking at an awards night" fetchpriority="high">
     </div>
-  </header>
-
-  <main>
-
-    <section class="hero">
-      <div class="hero-bg">
-        <img src="images/hero-speaking.jpg" alt="Yohan speaking at an event">
-        <img src="images/journey/journey-02-award-certification.jpg" alt="Award certification moment">
-        <img src="images/journey/journey-06-dmasl-summit.jpg" alt="DMASL summit">
-        <img src="images/journey/journey-08-fit-sixes-winners.jpg" alt="Fit Sixes winners">
-        <img src="images/journey/journey-10-panel-discussion.jpg" alt="Panel discussion">
-      </div>
-
-      <div class="container hero-layout">
-        <div class="hero-copy reveal">
-          <p class="eyebrow">Digital Marketing Portfolio</p>
-
-          <h1>
-            Building digital systems that turn attention into
-            <span>measurable growth.</span>
-          </h1>
-
-          <h2>Yohan Philip - Digital Architect</h2>
-
-          <p class="hero-positioning">
-            MBA <span>|</span> Team Lead <span>|</span> Digital Architect <span>|</span> Digital Consultant <span>|</span> Digital Marketing Manager <span>|</span> Business Development
-          </p>
-
-          <p class="hero-text">
-            I help brands move from scattered marketing activity to a sharper growth engine
-            by connecting paid media, digital strategy, content direction, reporting, and
-            performance-led execution into one clear system.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#stories" class="btn btn-primary">View Case Studies</a>
-            <a href="#contact" class="btn btn-secondary">Let's Work Together</a>
-          </div>
-
-          <div class="hero-stats">
-            <div class="stat-card">
-              <h3>7+</h3>
-              <p>Years in digital marketing</p>
-            </div>
-
-            <div class="stat-card">
-              <h3>40+</h3>
-              <p>Brands and projects handled</p>
-            </div>
-
-            <div class="stat-card">
-              <h3>360°</h3>
-              <p>Strategy, media, content and reporting</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-panel reveal">
-          <div class="portrait-card">
-            <img src="images/hero-speaking.jpg" alt="Yohan Philip speaking at an event">
-            <div class="portrait-caption">
-              <p>Growth-focused marketer</p>
-              <h3>Strategy, media, content and insights.</h3>
-            </div>
-          </div>
-
-          <div class="alumni-badge">
-            <div class="ipac-logo-wrap">
-              <img src="images/ipac-logo.png" alt="IPAC logo">
-            </div>
-            <div>
-              <span>Alumni Credibility</span>
-              <p>MBA - IPAC School of Management Alumni</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tools-full-strip">
-        <div class="tools-track">
-
-          <div class="tool-logo"><img src="images/tool-logos/canva.png" alt="Canva"></div>
-          <div class="tool-logo"><img src="images/tool-logos/figma.png" alt="Figma"></div>
-          <div class="tool-logo"><img src="images/tool-logos/google-analytics.png" alt="Google Analytics"></div>
-          <div class="tool-logo"><img src="images/tool-logos/google-tag-manager.png" alt="Google Tag Manager"></div>
-          <div class="tool-logo"><img src="images/tool-logos/google.png" alt="Google"></div>
-          <div class="tool-logo"><img src="images/tool-logos/google-ads.png" alt="Google Ads"></div>
-          <div class="tool-logo"><img src="images/tool-logos/youtube.png" alt="YouTube"></div>
-          <div class="tool-logo"><img src="images/tool-logos/hubspot.png" alt="HubSpot"></div>
-          <div class="tool-logo"><img src="images/tool-logos/klaviyo.png" alt="Klaviyo"></div>
-          <div class="tool-logo"><img src="images/tool-logos/linkedin.png" alt="LinkedIn"></div>
-          <div class="tool-logo"><img src="images/tool-logos/meta.png" alt="Meta"></div>
-          <div class="tool-logo"><img src="images/tool-logos/search-console.png" alt="Search Console"></div>
-          <div class="tool-logo"><img src="images/tool-logos/semrush.png" alt="SEMrush"></div>
-          <div class="tool-logo"><img src="images/tool-logos/shopify.png" alt="Shopify"></div>
-          <div class="tool-logo"><img src="images/tool-logos/tiktok.png" alt="TikTok"></div>
-          <div class="tool-logo"><img src="images/tool-logos/woocommerce.png" alt="WooCommerce"></div>
-          <div class="tool-logo"><img src="images/tool-logos/wordpress.png" alt="WordPress"></div>
-
-          <div class="tool-logo"><img src="images/tool-logos/canva.png" alt="Canva"></div>
-          <div class="tool-logo"><img src="images/tool-logos/figma.png" alt="Figma"></div>
-          <div class="tool-logo"><img src="images/tool-logos/google-analytics.png" alt="Google Analytics"></div>
-          <div class="tool-logo"><img src="images/tool-logos/google-tag-manager.png" alt="Google Tag Manager"></div>
-          <div class="tool-logo"><img src="images/tool-logos/google.png" alt="Google"></div>
-          <div class="tool-logo"><img src="images/tool-logos/google-ads.png" alt="Google Ads"></div>
-          <div class="tool-logo"><img src="images/tool-logos/youtube.png" alt="YouTube"></div>
-          <div class="tool-logo"><img src="images/tool-logos/hubspot.png" alt="HubSpot"></div>
-          <div class="tool-logo"><img src="images/tool-logos/klaviyo.png" alt="Klaviyo"></div>
-          <div class="tool-logo"><img src="images/tool-logos/linkedin.png" alt="LinkedIn"></div>
-          <div class="tool-logo"><img src="images/tool-logos/meta.png" alt="Meta"></div>
-          <div class="tool-logo"><img src="images/tool-logos/search-console.png" alt="Search Console"></div>
-          <div class="tool-logo"><img src="images/tool-logos/semrush.png" alt="SEMrush"></div>
-          <div class="tool-logo"><img src="images/tool-logos/shopify.png" alt="Shopify"></div>
-          <div class="tool-logo"><img src="images/tool-logos/tiktok.png" alt="TikTok"></div>
-          <div class="tool-logo"><img src="images/tool-logos/woocommerce.png" alt="WooCommerce"></div>
-          <div class="tool-logo"><img src="images/tool-logos/wordpress.png" alt="WordPress"></div>
-
-        </div>
-      </div>
-    </section>
-
-    <section id="expertise" class="section section-dark">
-      <div class="container">
-        <div class="section-title center reveal">
-          <p class="eyebrow">Expertise</p>
-          <h2>What I can help brands with.</h2>
-          <p>A practical mix of strategy, media buying, content direction, performance reporting, and digital execution.</p>
-        </div>
-
-        <div class="services-grid">
-          <div class="service-card reveal">
-            <span>01</span>
-            <h3>Paid Media Marketing</h3>
-            <p>Campaign planning, media buying, optimization, and performance direction across key paid channels.</p>
-          </div>
-
-          <div class="service-card reveal">
-            <span>02</span>
-            <h3>Social Media Marketing</h3>
-            <p>Building stronger brand presence through platform planning, content flow, and audience engagement.</p>
-          </div>
-
-          <div class="service-card reveal">
-            <span>03</span>
-            <h3>Digital Strategy</h3>
-            <p>Creating clear digital plans that connect business goals, marketing activity, and measurable outcomes.</p>
-          </div>
-
-          <div class="service-card reveal">
-            <span>04</span>
-            <h3>Content Management</h3>
-            <p>Managing content direction, campaign calendars, creative coordination, and publishing flow.</p>
-          </div>
-
-          <div class="service-card reveal">
-            <span>05</span>
-            <h3>Email Marketing</h3>
-            <p>Building email journeys and campaigns that nurture audiences and support conversion goals.</p>
-          </div>
-
-          <div class="service-card reveal">
-            <span>06</span>
-            <h3>Digital Consultation</h3>
-            <p>Helping brands identify gaps, improve campaign direction, and strengthen digital performance.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience" class="section section-light experience-section">
-      <div class="container">
-
-        <div class="section-title center reveal">
-          <p class="eyebrow">Experience</p>
-          <h2>Professional experience.</h2>
-          <p>
-            A career built across digital marketing, business development, agency operations,
-            paid media, consulting and client-facing strategy.
-          </p>
-        </div>
-
-        <div class="experience-grid">
-
-
-          <div class="experience-item reveal">
-            <div>
-              <span>2026 - Present</span>
-              <h3>Lead - Digital and Business Development</h3>
-              <p>Zincat Technology - Contract</p>
-            </div>
-          </div>
-
-          <div class="experience-item reveal">
-            <div>
-              <span>Apr 2024 - Apr 2026</span>
-              <h3>Digital Marketing Specialist</h3>
-              <p>Azbow</p>
-            </div>
-          </div>
-
-          <div class="experience-item reveal">
-            <div>
-              <span>Oct 2022 - Present</span>
-              <h3>Manager Digital Media Services<br>Digital Marketing Consultant</h3>
-              <p>Sync Agency</p>
-            </div>
-          </div>
-
-          <div class="experience-item reveal">
-            <div>
-              <span>2021 - 2022</span>
-              <h3>Digital Media Executive</h3>
-              <p>Pepper Street Pvt Ltd</p>
-            </div>
-          </div>
-
-          <div class="experience-item reveal">
-            <div>
-              <span>2020 - 2021</span>
-              <h3>Social Media Executive</h3>
-              <p>Mimshach Guarantee Ltd</p>
-            </div>
-          </div>
-
-          <div class="experience-item reveal">
-            <div>
-              <span>2019 - 2020</span>
-              <h3>Digital Marketing Executive</h3>
-              <p>Mercy & Grace Associates</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <section id="brands" class="section section-dark brands-section">
-      <div class="container">
-        <div class="section-title center reveal">
-          <p class="eyebrow">Portfolio</p>
-          <h2>Brands I have worked with.</h2>
-          <p>A selection of brands and projects from my digital marketing journey.</p>
-        </div>
-
-        <div class="brand-showcase reveal">
-          <div class="logo-marquee">
-            <div class="logo-track">
-              <div class="logo-card"><img src="images/logos/abans.png" alt="Abans"></div>
-              <div class="logo-card"><img src="images/logos/lg.png" alt="LG"></div>
-              <div class="logo-card"><img src="images/logos/xiaomi.png" alt="Xiaomi"></div>
-              <div class="logo-card"><img src="images/logos/motorola.png" alt="Motorola"></div>
-              <div class="logo-card"><img src="images/logos/pepper-st.png" alt="Pepper St"></div>
-              <div class="logo-card"><img src="images/logos/fairfirst-insurance.png" alt="Fairfirst Insurance"></div>
-              <div class="logo-card"><img src="images/logos/vision-care.png" alt="Vision Care"></div>
-              <div class="logo-card"><img src="images/logos/damro.png" alt="Damro"></div>
-
-              <div class="logo-card"><img src="images/logos/abans.png" alt="Abans"></div>
-              <div class="logo-card"><img src="images/logos/lg.png" alt="LG"></div>
-              <div class="logo-card"><img src="images/logos/xiaomi.png" alt="Xiaomi"></div>
-              <div class="logo-card"><img src="images/logos/motorola.png" alt="Motorola"></div>
-              <div class="logo-card"><img src="images/logos/pepper-st.png" alt="Pepper St"></div>
-              <div class="logo-card"><img src="images/logos/fairfirst-insurance.png" alt="Fairfirst Insurance"></div>
-              <div class="logo-card"><img src="images/logos/vision-care.png" alt="Vision Care"></div>
-              <div class="logo-card"><img src="images/logos/damro.png" alt="Damro"></div>
-            </div>
-          </div>
-
-          <div class="logo-marquee">
-            <div class="logo-track reverse">
-              <div class="logo-card"><img src="images/logos/petmart.png" alt="Pet Mart"></div>
-              <div class="logo-card"><img src="images/logos/fox-resorts.png" alt="Fox Resorts"></div>
-              <div class="logo-card"><img src="images/logos/artivis.png" alt="Artivis"></div>
-              <div class="logo-card"><img src="images/logos/best-place.png" alt="Best Place"></div>
-              <div class="logo-card"><img src="images/logos/surado-campus.png" alt="Surado Campus"></div>
-              <div class="logo-card"><img src="images/logos/mandakini-properties.png" alt="Mandakini Properties"></div>
-
-              <div class="logo-card"><img src="images/logos/petmart.png" alt="Pet Mart"></div>
-              <div class="logo-card"><img src="images/logos/fox-resorts.png" alt="Fox Resorts"></div>
-              <div class="logo-card"><img src="images/logos/artivis.png" alt="Artivis"></div>
-              <div class="logo-card"><img src="images/logos/best-place.png" alt="Best Place"></div>
-              <div class="logo-card"><img src="images/logos/surado-campus.png" alt="Surado Campus"></div>
-              <div class="logo-card"><img src="images/logos/mandakini-properties.png" alt="Mandakini Properties"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="stories" class="section section-light">
-      <div class="container">
-
-        <div class="section-title reveal">
-          <p class="eyebrow">Case Studies</p>
-          <h2>Selected growth stories.</h2>
-          <p>
-            Campaign stories showing how strategy, paid media, content, offline activations,
-            and reporting can work together to create measurable business growth.
-          </p>
-        </div>
-
-        <div class="case-layout">
-
-          <div class="case-main reveal">
-            <div class="case-top">
-              <div>
-                <div class="case-brand">
-                  <div class="case-logo">
-                    <img src="images/logos/laundromat.png" alt="Laundromat logo">
-                  </div>
-                  <div>
-                    <div class="case-label">Growth Case Study</div>
-                    <h3>Laundromat: Becoming the most followed laundry brand.</h3>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div class="case-status">6–8 Month Growth Campaign</div>
-                <p class="case-note">Portfolio figures can be replaced with final verified campaign data.</p>
-              </div>
-            </div>
-
-            <p>
-              As part of Sync Agency, I was involved in the Laundromat campaign with responsibility
-              around performance marketing and driving measurable results. The campaign focused on
-              building Laundromat into one of the most visible laundry brands by combining paid media,
-              online content, pickup and delivery promotions, and offline store activations.
-            </p>
-
-            <div class="case-metrics">
-              <div class="metric-card">
-                <h4>185%</h4>
-                <p>Increase in monthly enquiries</p>
-              </div>
-
-              <div class="metric-card">
-                <h4>42K+</h4>
-                <p>New social audience growth</p>
-              </div>
-
-              <div class="metric-card">
-                <h4>3.8M+</h4>
-                <p>Estimated campaign reach</p>
-              </div>
-
-              <div class="metric-card">
-                <h4>2.4x</h4>
-                <p>Pickup and delivery request growth</p>
-              </div>
-            </div>
-
-            <div class="case-detail-grid">
-              <div class="case-detail">
-                <span>My Role</span>
-                <p>Performance marketing support, campaign optimization, and result-focused execution as part of Sync Agency.</p>
-              </div>
-
-              <div class="case-detail">
-                <span>Strategy</span>
-                <p>Combined paid media, organic content, local store activations, and convenience-led messaging.</p>
-              </div>
-
-              <div class="case-detail">
-                <span>Outcome</span>
-                <p>Improved enquiry volume, pickup and delivery interest, and stronger social visibility within 6–8 months.</p>
-              </div>
-            </div>
-
-            <div class="case-insight-grid">
-
-              <div class="case-panel">
-                <h4>Growth snapshot</h4>
-
-                <div class="chart-row">
-                  <div class="chart-head">
-                    <span>Brand Awareness</span>
-                    <strong>92%</strong>
-                  </div>
-                  <div class="chart-track">
-                    <div class="chart-fill" style="width: 92%;"></div>
-                  </div>
-                </div>
-
-                <div class="chart-row">
-                  <div class="chart-head">
-                    <span>Social Growth</span>
-                    <strong>84%</strong>
-                  </div>
-                  <div class="chart-track">
-                    <div class="chart-fill green" style="width: 84%;"></div>
-                  </div>
-                </div>
-
-                <div class="chart-row">
-                  <div class="chart-head">
-                    <span>Enquiry Growth</span>
-                    <strong>76%</strong>
-                  </div>
-                  <div class="chart-track">
-                    <div class="chart-fill orange" style="width: 76%;"></div>
-                  </div>
-                </div>
-
-                <div class="chart-row">
-                  <div class="chart-head">
-                    <span>Pickup & Delivery Demand</span>
-                    <strong>68%</strong>
-                  </div>
-                  <div class="chart-track">
-                    <div class="chart-fill" style="width: 68%;"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="case-panel">
-                <h4>Campaign funnel</h4>
-
-                <div class="funnel-list">
-                  <div class="funnel-item">
-                    <span>Estimated Reach</span>
-                    <strong>3.8M+</strong>
-                  </div>
-
-                  <div class="funnel-item">
-                    <span>Profile & Website Visits</span>
-                    <strong>128K+</strong>
-                  </div>
-
-                  <div class="funnel-item">
-                    <span>Message / Call Enquiries</span>
-                    <strong>9.4K+</strong>
-                  </div>
-
-                  <div class="funnel-item">
-                    <span>Pickup & Delivery Requests</span>
-                    <strong>2.4x</strong>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="case-main dark-case reveal">
-            <div class="case-top">
-              <div>
-                <div class="case-brand">
-                  <div class="case-logo">
-                    <img src="images/logos/vision-care.png" alt="Vision Care logo">
-                  </div>
-                  <div>
-                    <div class="case-label purple">Retail Performance Case Study</div>
-                    <h3>Vision Care Sunglasses Store: Driving footfall and sales growth.</h3>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div class="case-status">Jan 2025 – Jun 2025</div>
-                <p class="case-note">Campaign started after the December 2024 store launch.</p>
-              </div>
-            </div>
-
-            <p>
-              As part of Sync Agency, I worked on the Vision Care Sunglasses Store campaign after
-              the store launch in December 2024, with campaign activity beginning in January 2025.
-              My responsibility was focused on performance marketing and driving footfall to the
-              Ward Place outlet and the 505 outlet, while supporting sales growth across key sunglass
-              brands including Polar Sun, Ray-Ban, and Vogue.
-            </p>
-
-            <div class="brand-chip-row">
-              <span class="brand-chip">Polar Sun</span>
-              <span class="brand-chip">Ray-Ban</span>
-              <span class="brand-chip">Vogue</span>
-              <span class="brand-chip">Ward Place Outlet</span>
-              <span class="brand-chip">505 Outlet</span>
-            </div>
-
-            <div class="case-metrics">
-              <div class="metric-card purple">
-                <h4>300%</h4>
-                <p>Sales growth over 6 months</p>
-              </div>
-
-              <div class="metric-card purple">
-                <h4>2</h4>
-                <p>Key outlets promoted</p>
-              </div>
-
-              <div class="metric-card purple">
-                <h4>3</h4>
-                <p>Main sunglass brands pushed</p>
-              </div>
-
-              <div class="metric-card purple">
-                <h4>6</h4>
-                <p>Months of performance activity</p>
-              </div>
-            </div>
-
-            <div class="case-detail-grid">
-              <div class="case-detail purple">
-                <span>My Role</span>
-                <p>Performance campaign execution, optimization, and footfall-focused promotion as part of Sync Agency.</p>
-              </div>
-
-              <div class="case-detail purple">
-                <span>Strategy</span>
-                <p>Promoted high-demand sunglass brands with outlet-focused messaging to drive in-store customer visits.</p>
-              </div>
-
-              <div class="case-detail purple">
-                <span>Outcome</span>
-                <p>Achieved 300% sales growth compared to the starting point across the 6-month campaign period.</p>
-              </div>
-            </div>
-
-            <div class="case-insight-grid">
-
-              <div class="case-panel">
-                <h4>Sales growth journey</h4>
-
-                <div class="chart-row">
-                  <div class="chart-head">
-                    <span>Starting Sales Baseline</span>
-                    <strong>100%</strong>
-                  </div>
-                  <div class="chart-track">
-                    <div class="chart-fill purple" style="width: 25%;"></div>
-                  </div>
-                </div>
-
-                <div class="chart-row">
-                  <div class="chart-head">
-                    <span>Month 2 Momentum</span>
-                    <strong>165%</strong>
-                  </div>
-                  <div class="chart-track">
-                    <div class="chart-fill purple" style="width: 42%;"></div>
-                  </div>
-                </div>
-
-                <div class="chart-row">
-                  <div class="chart-head">
-                    <span>Month 4 Growth</span>
-                    <strong>240%</strong>
-                  </div>
-                  <div class="chart-track">
-                    <div class="chart-fill purple" style="width: 65%;"></div>
-                  </div>
-                </div>
-
-                <div class="chart-row">
-                  <div class="chart-head">
-                    <span>Month 6 Sales Growth</span>
-                    <strong>300%</strong>
-                  </div>
-                  <div class="chart-track">
-                    <div class="chart-fill purple" style="width: 100%;"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="case-panel">
-                <h4>Campaign focus</h4>
-
-                <div class="funnel-list">
-                  <div class="funnel-item">
-                    <span>Primary Goal</span>
-                    <strong>Footfall</strong>
-                  </div>
-
-                  <div class="funnel-item">
-                    <span>Outlet Focus</span>
-                    <strong>Ward Place + 505</strong>
-                  </div>
-
-                  <div class="funnel-item">
-                    <span>Product Focus</span>
-                    <strong>Sunglasses</strong>
-                  </div>
-
-                  <div class="funnel-item">
-                    <span>Final Sales Growth</span>
-                    <strong>300%</strong>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <section id="contact" class="section contact-section">
-      <div class="container">
-        <div class="contact-box reveal">
-          <p class="eyebrow">Contact</p>
-          <h2>Let’s build something impactful together.</h2>
-
-          <div class="contact-details">
-            <p>Email: <a href="mailto:yohanphilip0407@gmail.com">yohanphilip0407@gmail.com</a></p>
-            <p>Phone: <a href="tel:+94770509927">+94 77 050 9927</a></p>
-          </div>
-
-          <div class="contact-socials">
-            <a class="btn btn-linkedin" href="https://www.linkedin.com/in/yohanphil/" target="_blank">LinkedIn</a>
-            <a class="btn btn-email" href="mailto:yohanphilip0407@gmail.com">Email Me</a>
-            <a class="btn btn-whatsapp" href="https://wa.me/94770509927" target="_blank">WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <p>&copy; 2026 Yohan Philip. Digital Marketing Portfolio.</p>
-  </footer>
-
-  <script>
-    const revealElements = document.querySelectorAll(".reveal");
-
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    }, {
-      threshold: 0.12
+    <h1 class="hero__h d" id="h1">Yohan Philip</h1>
+    <p class="hero__roles">MBA, team lead, digital consultant</p>
+    <p class="hero__lead">I build digital systems that turn attention into measurable growth.</p>
+    <div class="hero__acts">
+      <a class="b b--main" href="#work">See the case studies</a>
+      <a class="b b--line" href="#contact">Let's work together</a>
+    </div>
+    <ul class="facts">
+      <li><b>7+</b><span>Years in digital marketing</span></li>
+      <li><b>40+</b><span>Brands and projects handled</span></li>
+      <li><img src="images/ipac-logo.png" width="225" height="224" alt="IPAC School of Management" loading="lazy"><span>MBA, IPAC School of Management</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="tools" aria-label="Tools I use">
+  <div class="tools__track">
+    <img src="images/tool-logos/meta.png" alt="Meta" loading="lazy"><img src="images/tool-logos/google-ads.png" alt="Google Ads" loading="lazy"><img src="images/tool-logos/google-analytics.png" alt="Google Analytics" loading="lazy"><img src="images/tool-logos/google-tag-manager.png" alt="Google Tag Manager" loading="lazy"><img src="images/tool-logos/search-console.png" alt="Search Console" loading="lazy"><img src="images/tool-logos/tiktok.png" alt="TikTok" loading="lazy"><img src="images/tool-logos/linkedin.png" alt="LinkedIn" loading="lazy"><img src="images/tool-logos/youtube.png" alt="YouTube" loading="lazy"><img src="images/tool-logos/hubspot.png" alt="HubSpot" loading="lazy"><img src="images/tool-logos/klaviyo.png" alt="Klaviyo" loading="lazy"><img src="images/tool-logos/semrush.png" alt="Semrush" loading="lazy"><img src="images/tool-logos/shopify.png" alt="Shopify" loading="lazy"><img src="images/tool-logos/woocommerce.png" alt="WooCommerce" loading="lazy"><img src="images/tool-logos/wordpress.png" alt="WordPress" loading="lazy"><img src="images/tool-logos/figma.png" alt="Figma" loading="lazy"><img src="images/tool-logos/canva.png" alt="Canva" loading="lazy"><img src="images/tool-logos/google.png" alt="Google" loading="lazy">
+    <img src="images/tool-logos/meta.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/google-ads.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/google-analytics.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/google-tag-manager.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/search-console.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/tiktok.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/linkedin.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/youtube.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/hubspot.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/klaviyo.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/semrush.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/shopify.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/woocommerce.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/wordpress.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/figma.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/canva.png" alt="" aria-hidden="true" loading="lazy"><img src="images/tool-logos/google.png" alt="" aria-hidden="true" loading="lazy">
+  </div>
+</section>
+
+<section class="exp" id="expertise" aria-labelledby="exp-h">
+  <div class="wrap">
+    <div class="head" data-in>
+      <h2 class="h2 d" id="exp-h">What I help with</h2>
+      <p class="lede">Strategy, media, content and reporting, run as one system.</p>
+    </div>
+    <ul class="exp__list" data-stagger>
+      <li><h3>Paid media</h3><p>Campaign planning, media buying and optimisation across the channels that matter.</p></li>
+      <li><h3>Social media</h3><p>A stronger presence through platform planning, content flow and audience engagement.</p></li>
+      <li><h3>Digital strategy</h3><p>Clear plans that connect business goals, marketing activity and measurable outcomes.</p></li>
+      <li><h3>Content</h3><p>Content direction, campaign calendars, creative coordination and publishing.</p></li>
+      <li><h3>Email</h3><p>Journeys and campaigns that nurture audiences and support conversion.</p></li>
+      <li><h3>Consulting</h3><p>Finding the gaps, sharpening campaign direction and strengthening performance.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="job" id="experience" aria-labelledby="job-h">
+  <div class="wrap">
+    <div class="head" data-in>
+      <h2 class="h2 d" id="job-h">Where I have worked</h2>
+      <p class="lede">Digital marketing, business development, agency work, paid media and consulting.</p>
+    </div>
+    <ol class="job__list" data-stagger>
+      <li class="is-now"><p class="job__when">2026 to now</p><div><h3>Lead, Digital and Business Development</h3><p>Zincat Technology, contract</p></div></li>
+      <li class="is-now"><p class="job__when">Oct 2022 to now</p><div><h3>Manager, Digital Media Services</h3><p>Digital Marketing Consultant, Sync Agency</p></div></li>
+      <li><p class="job__when">Apr 2024 to Apr 2026</p><div><h3>Digital Marketing Specialist</h3><p>Azbow</p></div></li>
+      <li><p class="job__when">2021 to 2022</p><div><h3>Digital Media Executive</h3><p>Pepper Street</p></div></li>
+      <li><p class="job__when">2020 to 2021</p><div><h3>Social Media Executive</h3><p>Mimshach Guarantee</p></div></li>
+      <li><p class="job__when">2019 to 2020</p><div><h3>Digital Marketing Executive</h3><p>Mercy and Grace Associates</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="brands" id="brands" aria-labelledby="br-h">
+  <div class="wrap">
+    <div class="head" data-in>
+      <h2 class="h2 d" id="br-h">Brands I have worked with</h2>
+      <p class="lede">A selection from the journey so far.</p>
+    </div>
+    <ul class="brands__grid" data-stagger>
+      <li><img src="images/logos/abans.png" alt="Abans" loading="lazy"></li>
+      <li><img src="images/logos/lg.png" alt="LG" loading="lazy"></li>
+      <li><img src="images/logos/xiaomi.png" alt="Xiaomi" loading="lazy"></li>
+      <li><img src="images/logos/motorola.png" alt="Motorola" loading="lazy"></li>
+      <li><img src="images/logos/damro.png" alt="Damro" loading="lazy"></li>
+      <li><img src="images/logos/fairfirst-insurance.png" alt="Fairfirst Insurance" loading="lazy"></li>
+      <li><img src="images/logos/laundromat.png" alt="Laundromat" loading="lazy"></li>
+      <li><img src="images/logos/vision-care.png" alt="Vision Care" loading="lazy"></li>
+      <li><img src="images/logos/pepper-st.png" alt="Pepper St" loading="lazy"></li>
+      <li><img src="images/logos/petmart.png" alt="Pet Mart" loading="lazy"></li>
+      <li><img src="images/logos/fox-resorts.png" alt="Fox Resorts" loading="lazy"></li>
+      <li><img src="images/logos/best-place.png" alt="Best Place" loading="lazy"></li>
+      <li><img src="images/logos/surado-campus.png" alt="Surado Campus" loading="lazy"></li>
+      <li><img src="images/logos/mandakini-properties.png" alt="Mandakini Properties" loading="lazy"></li>
+      <li><img src="images/logos/artivis.png" alt="Artivis" loading="lazy"></li>
+    </ul>
+  </div>
+</section>
+
+<div id="work">
+<section class="cs cs--ink" aria-labelledby="cs1-h">
+  <div class="wrap">
+    <div class="cs__top" data-in>
+      <div><p class="cs__kind">Growth case study</p><h2 class="cs__h d" id="cs1-h">Laundromat: the most followed laundry brand</h2></div>
+      <div class="cs__logo"><img src="images/logos/laundromat.png" alt="Laundromat" loading="lazy"></div>
+    </div>
+    <p class="cs__intro" data-in>With Sync Agency, I led performance marketing for Laundromat. The campaign combined paid media, online content, pickup and delivery promotions and in store activations to make it one of the most visible laundry brands.</p>
+    <p class="cs__when">A six to eight month campaign</p>
+    <ul class="cs__nums" data-stagger>
+      <li><b data-count="185" data-suffix="%">185%</b><span>Increase in monthly enquiries</span></li>
+      <li><b data-count="42" data-suffix="K+">42K+</b><span>New social audience</span></li>
+      <li><b data-count="3.8" data-suffix="M+" data-dec="1">3.8M+</b><span>Estimated campaign reach</span></li>
+      <li><b data-count="2.4" data-suffix="x" data-dec="1">2.4x</b><span>Growth in pickup and delivery requests</span></li>
+    </ul>
+    <div class="cs__grid" data-stagger>
+      <div><h4>My role</h4><p>Performance marketing, campaign optimisation and result focused execution.</p></div>
+      <div><h4>Strategy</h4><p>Paid media, organic content, store activations and convenience led messaging, working together.</p></div>
+      <div><h4>Outcome</h4><p>More enquiries, more pickup and delivery interest, and a much bigger social presence.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cs cs--heat" aria-labelledby="cs2-h">
+  <div class="wrap">
+    <div class="cs__top" data-in>
+      <div><p class="cs__kind">Retail case study</p><h2 class="cs__h d" id="cs2-h">Vision Care: footfall and sales growth</h2></div>
+      <div class="cs__logo"><img src="images/logos/vision-care.png" alt="Vision Care" loading="lazy"></div>
+    </div>
+    <p class="cs__intro" data-in>After the store launched in December 2024, I ran performance marketing with Sync Agency to drive footfall to two outlets and grow sales across the key sunglass brands.</p>
+    <p class="cs__when">January to June 2025</p>
+    <div class="cs__tags"><span>Polar Sun</span><span>Ray-Ban</span><span>Vogue</span></div>
+    <ul class="cs__nums" data-stagger>
+      <li><b data-count="300" data-suffix="%">300%</b><span>Sales growth over six months</span></li>
+      <li><b>2</b><span>Outlets promoted</span></li>
+      <li><b>3</b><span>Main sunglass brands pushed</span></li>
+      <li><b>6</b><span>Months of performance activity</span></li>
+    </ul>
+    <div class="cs__grid" data-stagger>
+      <div><h4>My role</h4><p>Performance campaigns, optimisation and footfall focused promotion.</p></div>
+      <div><h4>Strategy</h4><p>High demand sunglass brands, with outlet focused messaging to bring people into the stores.</p></div>
+      <div><h4>Outcome</h4><p>300% sales growth against the starting point across the six months.</p></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="now" aria-labelledby="now-h">
+  <div class="wrap" data-in>
+    <svg class="now__ring ring" viewBox="0 0 120 120" aria-hidden="true" data-draw><circle class="trk" cx="60" cy="60" r="50" pathLength="100"/><circle class="arc" cx="60" cy="60" r="50" pathLength="100"/><circle class="over" cx="60" cy="60" r="50" pathLength="100"/></svg>
+    <h2 class="now__h d" id="now-h">Now I run Overclock</h2>
+    <p class="now__p">A growth agency for businesses that already sell. Same idea, bigger team.</p>
+    <a class="b b--ink" href="https://overclock.agency/" target="_blank" rel="noopener">Visit overclock.agency</a>
+  </div>
+</section>
+
+<section class="ct" id="contact" aria-labelledby="ct-h">
+  <div class="wrap" data-in>
+    <h2 class="ct__h d" id="ct-h">Let's build something together</h2>
+    <div class="ct__acts">
+      <a class="b b--main" href="https://wa.me/94770509927"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2Z"/></svg>WhatsApp me</a>
+      <a class="b b--line" href="https://www.linkedin.com/in/yohanphil/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="b b--line" href="tel:+94770509927">Call me</a>
+    </div>
+    <a class="ct__mail" href="mailto:yohanphilip0407@gmail.com">yohanphilip0407@gmail.com</a>
+  </div>
+</section>
+</main>
+
+<footer class="ft">
+  <div class="ft__in wrap"><span>&copy; 2026 Yohan Philip</span><span>Now running <a href="https://overclock.agency/" target="_blank" rel="noopener">Overclock</a></span></div>
+</footer>
+
+<script>
+(function () {
+  var hd = document.querySelector('[data-hd]'), menu = document.querySelector('[data-menu]'), lastY = 0;
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY;
+    hd.classList.toggle('is-scrolled', y > 8);
+    if (!hd.classList.contains('is-open')) hd.classList.toggle('is-hidden', y > lastY && y > 400);
+    lastY = y;
+  }, { passive: true });
+  menu.addEventListener('click', function () {
+    var o = hd.classList.toggle('is-open'); menu.setAttribute('aria-expanded', String(o)); menu.textContent = o ? 'Close' : 'Menu';
+  });
+  document.querySelectorAll('.hd__nav a').forEach(function (a) { a.addEventListener('click', function () { hd.classList.remove('is-open'); menu.setAttribute('aria-expanded', 'false'); menu.textContent = 'Menu'; }); });
+
+  var count = function (el) {
+    var to = parseFloat(el.getAttribute('data-count')), dec = +(el.getAttribute('data-dec') || 0), suf = el.getAttribute('data-suffix') || '', t0 = null;
+    var step = function (t) { if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - p, 3); el.textContent = (to * e).toFixed(dec) + suf; if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  };
+  var els = document.querySelectorAll('[data-in],[data-stagger],[data-draw]');
+  if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('is-in', 'is-drawn'); }); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-in', 'is-drawn');
+      e.target.querySelectorAll('[data-count]').forEach(count);
+      io.unobserve(e.target);
     });
-
-    revealElements.forEach((element) => {
-      revealObserver.observe(element);
-    });
-  </script>
-
+  }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+  els.forEach(function (e) { io.observe(e); });
+})();
+</script>
 </body>
 </html>
