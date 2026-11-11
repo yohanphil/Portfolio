@@ -130,15 +130,18 @@ html.js .hero__h{animation-delay:.1s}html.js .hero__roles{animation-delay:.18s}h
 
 /* case studies */
 .cs{padding-block:var(--sec)}
-.cs--laundromat{background:#0057B8;color:#FFFFFF}
+.cs--laundromat{background:#015F9F;color:#FFFFFF}
 .cs--laundromat .cs__nums{border-color:#7FD3E8}.cs--laundromat .cs__nums b{color:#FFFFFF}.cs--laundromat .cs__kind,.cs--laundromat .cs__when{color:#9FE0F0;opacity:1}
-.cs--vision{background:#0D1F86;color:#FFFFFF}
+.cs--vision{background:#034EA2;color:#FFFFFF}
 .cs--vision .cs__kind,.cs--vision .cs__when{color:#B9C3FF;opacity:1}
 .cs__top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:clamp(24px,5vw,80px);align-items:end}
 .cs__kind{font-weight:600;font-size:16px;opacity:.75}
 .cs__h{margin-top:14px;font-size:clamp(40px,5.6vw,92px)}
 .cs__logo{justify-self:end;width:min(100%,260px);aspect-ratio:2/1;display:grid;place-items:center;padding:18px 24px;border-radius:24px;background:#FFFFFF}
 .cs__logo img{max-height:100%;width:auto;object-fit:contain}
+.cs__mark{justify-self:end;width:clamp(150px,16vw,220px)}
+.cs__mark img{width:100%;height:auto}
+.cs__mark--wide{width:clamp(170px,18vw,250px)}
 .cs__intro{margin-top:clamp(24px,3vw,40px);max-width:60ch;font-size:clamp(17px,1.4vw,20px);line-height:1.6;opacity:.9}
 .cs__when{margin-top:14px;font-weight:600;font-size:15px;opacity:.75}
 .cs__nums{margin-top:clamp(44px,5vw,80px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.4vw,32px);border-top:2px solid currentColor;padding-top:clamp(24px,3vw,40px)}
@@ -178,7 +181,7 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
 /* tablet */
 @media (max-width:1000px){
   .brands__grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .cs__top{grid-template-columns:1fr}.cs__logo{justify-self:start}
+  .cs__top{grid-template-columns:1fr}.cs__logo,.cs__mark{justify-self:start;order:-1}
   .cs__nums{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}
   .cs__grid{grid-template-columns:1fr}
 }
@@ -297,7 +300,7 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
       <li><img src="images/logos/damro.png" style="--s:2.16" alt="Damro" loading="lazy"></li>
       <li><img src="images/logos/fairfirst-insurance.png" style="--s:1.03" alt="Fairfirst Insurance" loading="lazy"></li>
       <li><img src="images/logos/laundromat.png" style="--s:2.05" alt="Laundromat" loading="lazy"></li>
-      <li><img src="images/logos/vision-care.png" style="--s:1.17" alt="Vision Care" loading="lazy"></li>
+      <li><img src="images/logos/vision-care.svg" style="--s:1.16" alt="Vision Care" loading="lazy"></li>
       <li><img src="images/logos/pepper-st.png" style="--s:2.69" alt="Pepper St" loading="lazy"></li>
       <li><img src="images/logos/petmart.png" style="--s:1.53" alt="Pet Mart" loading="lazy"></li>
       <li><img src="images/logos/fox-resorts.png" style="--s:1.22" alt="Fox Resorts" loading="lazy"></li>
@@ -327,7 +330,7 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
   <div class="wrap">
     <div class="cs__top" data-in>
       <div><p class="cs__kind">Growth case study</p><h2 class="cs__h d" id="cs1-h">Laundromat: the most followed laundry brand</h2></div>
-      <div class="cs__logo"><img src="images/logos/laundromat.png" alt="Laundromat" loading="lazy"></div>
+      <div class="cs__mark"><img src="images/laundromat-mark.png" width="600" height="600" alt="Laundromat" loading="lazy"></div>
     </div>
     <p class="cs__intro" data-in>With Sync Agency, I led performance marketing for Laundromat. The campaign combined paid media, online content, pickup and delivery promotions and in store activations to make it one of the most visible laundry brands.</p>
     <p class="cs__when">A six to eight month campaign</p>
@@ -349,7 +352,7 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
   <div class="wrap">
     <div class="cs__top" data-in>
       <div><p class="cs__kind">Retail case study</p><h2 class="cs__h d" id="cs2-h">Vision Care: footfall and sales growth</h2></div>
-      <div class="cs__logo"><img src="images/logos/vision-care.png" alt="Vision Care" loading="lazy"></div>
+      <div class="cs__mark cs__mark--wide"><img src="images/vision-care-white.svg" width="114" height="84" alt="Vision Care" loading="lazy"></div>
     </div>
     <p class="cs__intro" data-in>After the store launched in December 2024, I ran performance marketing with Sync Agency to drive footfall to two outlets and grow sales across the key sunglass brands.</p>
     <p class="cs__when">January to June 2025</p>
