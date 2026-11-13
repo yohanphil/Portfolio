@@ -96,7 +96,8 @@ html.js .hero__h{animation-delay:.1s}html.js .hero__roles{animation-delay:.18s}h
 .top-brands li{width:clamp(110px,10vw,140px);aspect-ratio:3/2;display:grid;place-items:center;border-radius:16px;background:var(--bg2);padding:12px}
 .top-brands img{height:calc(clamp(40px,3.8vw,54px) / var(--s,1));width:auto;max-width:86%;max-height:100%;object-fit:contain}
 html.js .top-brands{animation:up 1s var(--ease) both;animation-delay:.5s}
-@media (max-width:640px){.top-brands ul{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}.top-brands li{width:auto}.top-brands li:last-child{display:none}}
+.top-brands img{transition:opacity .45s var(--ease),transform .45s var(--ease)}.top-brands img.out{opacity:0;transform:translateY(6px) scale(.96)}
+@media (max-width:640px){.top-brands ul{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}.top-brands li{width:auto}}
 /* tools */
 .tools{padding-block:28px 40px;overflow:hidden;border-block:1px solid var(--line)}
 .tools__track{display:flex;gap:56px;width:max-content;animation:slide 48s linear infinite}
@@ -292,14 +293,10 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
     </ul>
     <div class="top-brands">
       <p>Brands I have worked with include</p>
-      <ul>
+      <ul aria-live="off">
         <li><img src="images/logos/apple.png" style="--s:0.91" alt="Apple"></li>
         <li><img src="images/logos/lg.png" style="--s:1.44" alt="LG"></li>
         <li><img src="images/logos/xiaomi.png" style="--s:1.79" alt="Xiaomi"></li>
-        <li><img src="images/logos/motorola.png" style="--s:1.20" alt="Motorola"></li>
-        <li><img src="images/logos/abans.png" style="--s:1.87" alt="Abans"></li>
-        <li><img src="images/logos/damro.png" style="--s:2.16" alt="Damro"></li>
-        <li><img src="images/logos/fairfirst-insurance.png" style="--s:1.03" alt="Fairfirst Insurance"></li>
       </ul>
     </div>
   </div>
@@ -508,7 +505,7 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
 <script>
 (function(){
   var bk=document.getElementById('bk'),mb=document.getElementById('mbar'),shown=false,last=null;
-  function open(){if(shown)return;shown=true;last=document.activeElement;bk.hidden=false;requestAnimationFrame(function(){bk.classList.add('is-open')});var f=bk.querySelector('.b--main');if(f)f.focus({preventScroll:true});}
+  function open(){if(shown)return;if(document.querySelector('.ck')){if(!open.w){open.w=1;document.addEventListener('oc-consent',function(){setTimeout(function(){open.w=0;open()},1500)},{once:true})}return}shown=true;last=document.activeElement;bk.hidden=false;requestAnimationFrame(function(){bk.classList.add('is-open')});var f=bk.querySelector('.b--main');if(f)f.focus({preventScroll:true});}
   function close(){bk.classList.remove('is-open');setTimeout(function(){bk.hidden=true},320);if(last&&last.focus)last.focus({preventScroll:true});}
   bk.addEventListener('click',function(e){if(e.target===bk||e.target.closest('[data-bk-close]'))close();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&bk.classList.contains('is-open'))close();});
@@ -516,6 +513,26 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
   function onScroll(){var y=window.scrollY,h=document.documentElement.scrollHeight-innerHeight;if(!shown&&h>0&&y/h>0.35){clearTimeout(t);open();}if(mb)mb.classList.toggle('is-on',y>innerHeight*0.8);}
   addEventListener('scroll',onScroll,{passive:true});onScroll();
 })();
+</script>
+<script>
+(function(){
+  var slots=[].slice.call(document.querySelectorAll('.top-brands img'));
+  var all=[].slice.call(document.querySelectorAll('.brands__grid img')).map(function(i){return {src:i.getAttribute('src'),s:i.style.getPropertyValue('--s')||'1',alt:i.alt}});
+  if(!slots.length||all.length<=slots.length)return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  all.forEach(function(b){var im=new Image();im.src=b.src});
+  var start=0,L=all.length;
+  function swap(slot,b){slot.classList.add('out');setTimeout(function(){slot.src=b.src;slot.alt=b.alt;slot.style.setProperty('--s',b.s);requestAnimationFrame(function(){slot.classList.remove('out')})},450)}
+  setInterval(function(){
+    if(document.hidden)return;
+    start=(start+slots.length)%L;
+    slots.forEach(function(slot,n){setTimeout(function(){swap(slot,all[(start+n)%L])},n*160)});
+  },2800);
+})();
+</script>
+<script>
+window.OC_CONSENT={ga:'',cl:'',text:"This site doesn't use tracking or advertising cookies. Your browser only remembers that you closed this note.",decline:false,ok:'Got it',bottom:84};
+(function(){var K='oc-consent',C=window.OC_CONSENT||{},v=null;try{v=localStorage.getItem(K)}catch(e){}function load(){if(window.__ocLoaded)return;window.__ocLoaded=1;if(C.ga){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id='+C.ga;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',C.ga);}if(C.cl){(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",C.cl);}}if(v==='yes'){load();return}if(v==='no')return;function show(){var css='.ck{position:fixed;left:16px;right:16px;bottom:16px;z-index:100;max-width:440px;margin-left:auto;background:#0A0A0A;color:#F2F2F2;border-radius:22px;padding:22px 22px 18px;box-shadow:0 24px 60px rgba(0,0,0,.3);font:400 15px/1.5 Inter,system-ui,sans-serif;transform:translateY(20px);opacity:0;transition:transform .4s cubic-bezier(.2,.7,.2,1),opacity .4s}'+'.ck.on{transform:none;opacity:1}.ck b{display:block;font:700 18px/1.2 Poppins,Inter,sans-serif;letter-spacing:-.02em;margin-bottom:6px}'+'.ck p{color:#BDBDBD;margin:0}.ck a{color:#F2F2F2;text-decoration:underline;text-underline-offset:3px}'+'.ck__r{display:flex;gap:10px;margin-top:16px}.ck button{flex:1;min-height:46px;border-radius:999px;font:600 15px Inter,system-ui,sans-serif;cursor:pointer;border:1.5px solid #F2F2F2;background:transparent;color:#F2F2F2}'+'.ck button.y{background:#FF5A14;border-color:#FF5A14;color:#0A0A0A}'+'@media (max-width:760px){.ck{left:10px;right:10px;bottom:'+(C.bottom||10)+'px;max-width:none;padding:18px 18px 16px}}'+'@media (prefers-reduced-motion:reduce){.ck{transition:none}}';var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);var d=document.createElement('div');d.className='ck';d.setAttribute('role','region');d.setAttribute('aria-label','Cookie choices');d.innerHTML='<b>Cookies</b><p>'+(C.text||'We use cookies to see how the site is used and make it better.')+(C.policy?' <a href="'+C.policy+'">Privacy policy</a>':'')+'</p><div class="ck__r">'+(C.decline!==false?'<button type="button" class="n">Decline</button>':'')+'<button type="button" class="y">'+(C.ok||'Accept')+'</button></div>';document.body.appendChild(d);requestAnimationFrame(function(){requestAnimationFrame(function(){d.classList.add('on')})});function set(x){try{localStorage.setItem(K,x)}catch(e){}d.classList.remove('on');setTimeout(function(){d.remove()},400);if(x==='yes')load();document.dispatchEvent(new CustomEvent('oc-consent',{detail:x}))}d.querySelector('.y').onclick=function(){set('yes')};var n=d.querySelector('.n');if(n)n.onclick=function(){set('no')};}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(show,800)});else setTimeout(show,800);})();
 </script>
 </body>
 </html>
