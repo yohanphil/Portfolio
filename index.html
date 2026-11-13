@@ -89,6 +89,14 @@ html.js .hero__me,html.js .hero__h,html.js .hero__roles,html.js .hero__slogan,ht
 html.js .hero__h{animation-delay:.1s}html.js .hero__roles{animation-delay:.18s}html.js .hero__slogan{animation-delay:.24s}html.js .hero__acts{animation-delay:.32s}html.js .facts{animation-delay:.42s}
 @keyframes up{from{opacity:0;transform:translateY(18px)}}
 
+/* top brands under the facts */
+.top-brands{margin-top:clamp(40px,5vw,64px);display:flex;flex-direction:column;align-items:center;gap:18px}
+.top-brands p{font-size:15px;color:var(--ink2)}
+.top-brands ul{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px}
+.top-brands li{width:clamp(110px,10vw,140px);aspect-ratio:3/2;display:grid;place-items:center;border-radius:16px;background:var(--bg2);padding:12px}
+.top-brands img{height:calc(clamp(40px,3.8vw,54px) / var(--s,1));width:auto;max-width:86%;max-height:100%;object-fit:contain}
+html.js .top-brands{animation:up 1s var(--ease) both;animation-delay:.5s}
+@media (max-width:640px){.top-brands ul{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}.top-brands li{width:auto}.top-brands li:last-child{display:none}}
 /* tools */
 .tools{padding-block:28px 40px;overflow:hidden;border-block:1px solid var(--line)}
 .tools__track{display:flex;gap:56px;width:max-content;animation:slide 48s linear infinite}
@@ -253,6 +261,18 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
       <li><b>60+</b><span>Brands and projects handled</span></li>
       <li><img src="images/ipac-logo.png" width="225" height="224" alt="IPAC School of Management" loading="lazy"><span>MBA, IPAC School of Management</span></li>
     </ul>
+    <div class="top-brands">
+      <p>Brands I have worked with include</p>
+      <ul>
+        <li><img src="images/logos/apple.png" style="--s:0.91" alt="Apple"></li>
+        <li><img src="images/logos/lg.png" style="--s:1.44" alt="LG"></li>
+        <li><img src="images/logos/xiaomi.png" style="--s:1.79" alt="Xiaomi"></li>
+        <li><img src="images/logos/motorola.png" style="--s:1.20" alt="Motorola"></li>
+        <li><img src="images/logos/abans.png" style="--s:1.87" alt="Abans"></li>
+        <li><img src="images/logos/damro.png" style="--s:2.16" alt="Damro"></li>
+        <li><img src="images/logos/fairfirst-insurance.png" style="--s:1.03" alt="Fairfirst Insurance"></li>
+      </ul>
+    </div>
   </div>
 </section>
 
