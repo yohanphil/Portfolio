@@ -97,6 +97,7 @@ html.js .hero__h{animation-delay:.1s}html.js .hero__roles{animation-delay:.18s}h
 .top-brands img{height:calc(clamp(40px,3.8vw,54px) / var(--s,1));width:auto;max-width:86%;max-height:100%;object-fit:contain}
 html.js .top-brands{animation:up 1s var(--ease) both;animation-delay:.5s}
 .top-brands img{transition:opacity .45s var(--ease),transform .45s var(--ease)}.top-brands img.out{opacity:0;transform:translateY(6px) scale(.96)}
+@media (prefers-reduced-motion:reduce){.top-brands img{transition:opacity .4s linear}.top-brands img.out{transform:none}}
 @media (max-width:640px){.top-brands ul{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}.top-brands li{width:auto}}
 /* tools */
 .tools{padding-block:28px 40px;overflow:hidden;border-block:1px solid var(--line)}
@@ -519,7 +520,6 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
   var slots=[].slice.call(document.querySelectorAll('.top-brands img'));
   var all=[].slice.call(document.querySelectorAll('.brands__grid img')).map(function(i){return {src:i.getAttribute('src'),s:i.style.getPropertyValue('--s')||'1',alt:i.alt}});
   if(!slots.length||all.length<=slots.length)return;
-  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   all.forEach(function(b){var im=new Image();im.src=b.src});
   var start=0,L=all.length;
   function swap(slot,b){slot.classList.add('out');setTimeout(function(){slot.src=b.src;slot.alt=b.alt;slot.style.setProperty('--s',b.s);requestAnimationFrame(function(){slot.classList.remove('out')})},450)}
