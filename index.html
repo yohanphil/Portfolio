@@ -266,6 +266,12 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
 .now{padding-block:var(--sec)}
 .now__ring{margin-bottom:18px}
 @media (max-width:760px){:root{--sec:44px}.tools{padding-block:18px 22px}}
+
+/* phone: section headings on one line, no small lead text under them */
+@media (max-width:760px){
+  .head .h2{white-space:nowrap;font-size:min(42px,calc((100vw - 2*var(--pad)) / 12.6))}
+  .head .lede{display:none}
+}
 </style>
 </head>
 <body>
