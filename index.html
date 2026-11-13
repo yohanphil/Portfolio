@@ -89,6 +89,7 @@ html.js .hero__me,html.js .hero__h,html.js .hero__roles,html.js .hero__slogan,ht
 html.js .hero__h{animation-delay:.1s}html.js .hero__roles{animation-delay:.18s}html.js .hero__slogan{animation-delay:.24s}html.js .hero__acts{animation-delay:.32s}html.js .facts{animation-delay:.42s}
 @keyframes up{from{opacity:0;transform:translateY(18px)}}
 
+@media (max-width:760px){.brands__grid li.hide-m{display:none}}
 /* top brands under the facts */
 .top-brands{margin-top:clamp(40px,5vw,64px);display:flex;flex-direction:column;align-items:center;gap:18px}
 .top-brands p{font-size:15px;color:var(--ink2)}
@@ -352,6 +353,8 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
     </div>
     <ul class="brands__grid" data-stagger>
       <li><img src="images/logos/abans.png" style="--s:1.87" alt="Abans" loading="lazy"></li>
+      <li><img src="images/logos/abans-laptops.png" style="--s:1.44" alt="Abans Laptops" loading="lazy"></li>
+      <li><img src="images/logos/abans-smartphones.png" style="--s:1.46" alt="Abans Smartphones" loading="lazy"></li>
       <li><img src="images/logos/lg.png" style="--s:1.44" alt="LG" loading="lazy"></li>
       <li><img src="images/logos/xiaomi.png" style="--s:1.79" alt="Xiaomi" loading="lazy"></li>
       <li><img src="images/logos/motorola.png" style="--s:1.20" alt="Motorola" loading="lazy"></li>
@@ -369,7 +372,7 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
       <li><img src="images/logos/apple.png" style="--s:0.91" alt="Apple" loading="lazy"></li>
       <li><img src="images/logos/edinborough.png" style="--s:1.36" alt="Edinborough" loading="lazy"></li>
       <li><img src="images/logos/trinity-international.png" style="--s:1.02" alt="Trinity International" loading="lazy"></li>
-      <li><img src="images/logos/swastha-amurtha.png" style="--s:1.21" alt="Swastha Amurtha" loading="lazy"></li>
+      <li class="hide-m"><img src="images/logos/swastha-amurtha.png" style="--s:1.21" alt="Swastha Amurtha" loading="lazy"></li>
       <li><img src="images/logos/territory-london.png" style="--s:2.02" alt="Territory London" loading="lazy"></li>
       <li><img src="images/logos/xitricon.png" style="--s:1.10" alt="Xitricon" loading="lazy"></li>
       <li><img src="images/logos/virstack-ai.png" style="--s:2.45" alt="Virstack AI" loading="lazy"></li>
@@ -377,8 +380,6 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
       <li><img src="images/logos/slra.png" style="--s:1.80" alt="SLRA" loading="lazy"></li>
       <li><img src="images/logos/arthur-spence-travels.png" style="--s:2.08" alt="Aitken Spence Travels" loading="lazy"></li>
       <li><img src="images/logos/strength-logo.png" style="--s:1.03" alt="Strength" loading="lazy"></li>
-      <li><img src="images/logos/abans-laptops.png" style="--s:1.44" alt="Abans Laptops" loading="lazy"></li>
-      <li><img src="images/logos/abans-smartphones.png" style="--s:1.46" alt="Abans Smartphones" loading="lazy"></li>
     </ul>
   </div>
 </section>
@@ -518,10 +519,10 @@ html.js [data-stagger].is-in>*:nth-child(2){transition-delay:.06s}html.js [data-
 <script>
 (function(){
   var slots=[].slice.call(document.querySelectorAll('.top-brands img'));
-  var all=[].slice.call(document.querySelectorAll('.brands__grid img')).map(function(i){return {src:i.getAttribute('src'),s:i.style.getPropertyValue('--s')||'1',alt:i.alt}});
+  var all=[].slice.call(document.querySelectorAll('.brands__grid li')).filter(function(l){return getComputedStyle(l).display!=='none'}).map(function(l){return l.querySelector('img')}).map(function(i){return {src:i.getAttribute('src'),s:i.style.getPropertyValue('--s')||'1',alt:i.alt}});
   if(!slots.length||all.length<=slots.length)return;
   all.forEach(function(b){var im=new Image();im.src=b.src});
-  var start=0,L=all.length;
+  var start=-slots.length,L=all.length;
   function swap(slot,b){slot.classList.add('out');setTimeout(function(){slot.src=b.src;slot.alt=b.alt;slot.style.setProperty('--s',b.s);requestAnimationFrame(function(){slot.classList.remove('out')})},450)}
   setInterval(function(){
     if(document.hidden)return;
